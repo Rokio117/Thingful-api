@@ -5,7 +5,7 @@ const { requireAuth } = require('../middleware/basic-auth');
 const reviewsRouter = express.Router();
 const jsonBodyParser = express.json();
 
-reviewsRouter.all(requireAuth);
+reviewsRouter.use(requireAuth);
 
 reviewsRouter.route('/').post(jsonBodyParser, (req, res, next) => {
   console.log(req.user);
