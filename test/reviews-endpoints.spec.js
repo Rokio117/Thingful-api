@@ -2,7 +2,7 @@ const knex = require('knex');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
-describe('Reviews Endpoints', function() {
+describe.skip('Reviews Endpoints', function() {
   let db;
 
   const { testThings, testUsers } = helpers.makeThingsFixtures();
@@ -21,7 +21,7 @@ describe('Reviews Endpoints', function() {
 
   afterEach('cleanup', () => helpers.cleanTables(db));
 
-  describe.only(`POST /api/reviews`, () => {
+  describe(`POST /api/reviews`, () => {
     beforeEach('insert things', () =>
       helpers.seedThingsTables(db, testUsers, testThings)
     );
