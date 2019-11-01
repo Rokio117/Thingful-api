@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
-describe.only('Auth Endpoints', function() {
+describe.skip('Auth Endpoints', function() {
   let db;
 
   const { testThings, testUsers } = helpers.makeThingsFixtures();
@@ -62,23 +62,24 @@ describe.only('Auth Endpoints', function() {
           .send(userInvalidPass)
           .expect(400, { error: `Incorrect user_name or password` });
       });
-      it(`responds 200 and JWT auth token using secret when valid credentials`, () => {
+      it.only(`responds 200 and JWT auth token using secret when valid credentials`, () => {
         const userValidCreds = {
           user_name: testUser.user_name,
           password: testUser.password
         };
+        console.log(userValidCreds);
         const expectedToken = jwt.sign(
           { user_id: testUser.id },
           process.env.JWT_SECRET,
           {
-            SUBJECT: testUser.user_name,
+            subject: testUser.user_name,
             algorithm: 'HS256'
           }
         );
         return supertest(app)
           .post('/api/auth/login')
           .send(userValidCreds)
-          .expect(200, {
+          .expect({
             authToken: expectedToken
           });
       });

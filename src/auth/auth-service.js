@@ -9,7 +9,20 @@ const AuthService = {
       .first();
   },
   comparePasswords(password, hash) {
+    console.log(password, 'password', hash, 'hash');
+    console.log(typeof password, typeof hash);
     return bcrypt.compare(password, hash);
+  },
+  createJwt(subject, payload) {
+    return jwt.sign(payload, config.JWT_SECRET, {
+      subject,
+      algorithm: 'HS256'
+    });
+  },
+  verifyJwt(token) {
+    return jwt.verify(token, config.JWT_SECRET, {
+      algorithms: ['HS256']
+    });
   }
 };
 
