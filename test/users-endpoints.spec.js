@@ -117,7 +117,6 @@ describe.only('Users Endpoints', function() {
             password: `11AAaa!!`,
             full_name: 'test full_name'
           };
-
           return supertest(app)
             .post('./api/users')
             .send(duplicateUser)
