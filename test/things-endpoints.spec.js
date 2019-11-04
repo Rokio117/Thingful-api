@@ -28,7 +28,7 @@ describe.skip('Things Endpoints', function() {
     return `Basic ${token}`;
   }
 
-  describe.only(`Protected endpoints`, () => {
+  describe(`Protected endpoints`, () => {
     this.beforeEach('insert things', () =>
       helpers.seedThingsTables(db, testUsers, testThings, testReviews)
     );
